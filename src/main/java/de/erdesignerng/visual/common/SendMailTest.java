@@ -52,7 +52,7 @@ public class SendMailTest extends UICommand{
         final String username = "bmaputrazzzz@gmail.com";   
           
         // change accordingly
-        final String password = "22Okt1998";
+        final String password = "passwordnya";
           
         // or IP address
         final String host = "localhost"; 
