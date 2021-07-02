@@ -802,6 +802,12 @@ public class JGraphEditor extends DefaultScrollPane implements GenericModelEdito
 
         aMenu.add(theOnePerTable);
     }
+    
+    // Bima Putra S
+    public void getImageExport(Exporter aExporter){
+        ExportGraphicsCommand EGCTemp = new ExportGraphicsCommand(this, aExporter, ExportType.ALL_IN_ONE);
+        EGCTemp.exportToFile();
+    }
 
     @Override
     public boolean supportsZoom() {
@@ -844,6 +850,15 @@ public class JGraphEditor extends DefaultScrollPane implements GenericModelEdito
 
             addExportEntries(theSingleExportMenu, new ImageExporter("png"));
         }
+        /*
+        if (theSupportedFormats.contains("IMAGE/PNG")) {
+            DefaultMenu theSingleExportMenu = new DefaultMenu(aProvider,
+                    ERDesignerBundle.ASPNG_Email);
+            aExportMenu.add(theSingleExportMenu);
+
+            getImageExport(new ImageExporter("jpg"));
+        }
+        */
         if (theSupportedFormats.contains("IMAGE/JPEG")) {
             DefaultMenu theSingleExportMenu = new DefaultMenu(aProvider,
                     ERDesignerBundle.ASJPEG);

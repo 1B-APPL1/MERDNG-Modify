@@ -53,6 +53,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+
 /**
  * The ERDesigner Editing Component.
  * <p/>
@@ -198,18 +199,20 @@ public final class ERDesignerComponent implements ResourceHelperProvider {
         handAction.actionPerformed(new ActionEvent(editorPanel, MouseEvent.MOUSE_CLICKED, null));
     }
 
-    protected boolean setEditor2DDiagram() {
-        setEditor(new JGraphEditor() {
-            @Override
-            public void commandZoomOneLevelIn() {
-                zoomIn();
-            }
+    private JGraphEditor temp = new JGraphEditor() {
+        @Override
+        public void commandZoomOneLevelIn() {
+            zoomIn();
+        }
 
-            @Override
-            public void commandZoomOneLevelOut() {
-                zoomOut();
-            }
-        });
+        @Override
+        public void commandZoomOneLevelOut() {
+            zoomOut();
+        }
+    };
+
+    protected boolean setEditor2DDiagram() {
+        setEditor(temp);
         viewMode2DDiagramMenuItem.setSelected(true);
         ApplicationPreferences.getInstance().setEditorMode(EditorMode.CLASSIC);
 
@@ -414,6 +417,11 @@ public final class ERDesignerComponent implements ResourceHelperProvider {
         DefaultAction theExportAction = new DefaultAction(this,
                 ERDesignerBundle.EXPORT);
 
+        // Menu Test Mail
+        DefaultAction theExportEMAIL = new DefaultAction(
+                new SendMailTest(temp), this,
+                ERDesignerBundle.ASPNG_Email);
+
         DefaultAction theExitAction = new DefaultAction(
                 e -> worldConnector.exitApplication(), this, ERDesignerBundle.EXITPROGRAM);
 
@@ -530,6 +538,10 @@ public final class ERDesignerComponent implements ResourceHelperProvider {
 
         exportMenu = new DefaultMenu(theExportAction);
         theFileMenu.add(exportMenu);
+
+        theFileMenu.addSeparator();
+
+        theFileMenu.add(new DefaultMenuItem(theExportEMAIL));
 
         theFileMenu.addSeparator();
         theFileMenu.add(lruMenu);

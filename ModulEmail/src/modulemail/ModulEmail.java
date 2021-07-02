@@ -27,7 +27,7 @@ public class ModulEmail {
         final String username = "bmaputrazzzz@gmail.com";   
           
         // change accordingly
-        final String password = "passwordnyaapaya, jgn liat anjay";
+        final String password = "22Okt1998";
           
         // or IP address
         final String host = "localhost"; 

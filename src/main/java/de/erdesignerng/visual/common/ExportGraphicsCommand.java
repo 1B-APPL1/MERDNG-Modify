@@ -17,6 +17,7 @@
  */
 package de.erdesignerng.visual.common;
 
+import static javax.swing.JOptionPane.showMessageDialog;
 import de.erdesignerng.io.GenericFileFilter;
 import de.erdesignerng.model.ModelItem;
 import de.erdesignerng.visual.ExportType;
@@ -29,6 +30,8 @@ import org.jgraph.graph.DefaultGraphCell;
 import javax.swing.JFileChooser;
 import java.io.File;
 import java.io.FileOutputStream;
+
+import static javax.swing.JOptionPane.showMessageDialog;
 
 public class ExportGraphicsCommand extends UICommand {
 
@@ -82,13 +85,31 @@ public class ExportGraphicsCommand extends UICommand {
             if (theChooser.showSaveDialog(getDetailComponent()) == JFileChooser.APPROVE_OPTION) {
 
                 File theFile = theFilter.getCompletedFile(theChooser.getSelectedFile());
+                showMessageDialog(null, theChooser.getSelectedFile());
                 try {
                     exporter.fullExportToStream(editor.getGraph(), new FileOutputStream(theFile));
+                    exportToFile();
                 } catch (Exception e) {
                     getWorldConnector().notifyAboutException(e);
                 }
             }
 
+        }
+    }
+    
+    public void exportToFile(){
+        showMessageDialog(null, "Sedang export");
+        GenericFileFilter theFilter = new GenericFileFilter(exporter.getFileExtension(), exporter
+                    .getFileExtension()
+                    + " File");
+        File tmp = new File(System.getProperty("user.dir") + "/export.png");
+        File theFile = theFilter.getCompletedFile(tmp);
+        showMessageDialog(null, theFile);
+        try {
+            exporter.fullExportToStream(editor.getGraph(), new FileOutputStream(theFile));
+        }
+        catch (Exception e) {
+            getWorldConnector().notifyAboutException(e);
         }
     }
 }

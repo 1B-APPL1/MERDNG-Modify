@@ -59,6 +59,10 @@
             <Text lang="de">als PNG</Text>
             <Text lang="en">as PNG</Text>
         </Entry>
+        <Entry id="ASPNG_Email">
+            <Text lang="de">als PNG to Email</Text>
+            <Text lang="en">as PNG to Email</Text>
+        </Entry>
         <Entry id="ASJPEG">
             <Text lang="de">als JPEG</Text>
             <Text lang="en">as JPEG</Text>
